@@ -1,26 +1,31 @@
 import styled from "styled-components"
+import axios from  'axios';
+import { useEffect, useState } from "react";
+import MovieContainer from "../../components/movieContainer";
 
 export default function HomePage() {
+    const [listaFilmes, setListaFIlmes] = useState([]);
+    useEffect(()=>{
+        const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies";
+        const promise = axios.get(url);
+        promise.then((resp) => {
+            console.log(resp.data);
+            setListaFIlmes(resp.data);
+        });
+        promise.catch( (erro) => console.log(erro));    
+    },[]);
+
+    const Filmes = listaFilmes.map((el)=>
+        <MovieContainer id={el.id} posterURL={el.posterURL} title ={el.title} key={el.id}/>
+    );
+
+
     return (
         <PageContainer>
             Selecione o filme
 
             <ListContainer>
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
+                {Filmes}
             </ListContainer>
 
         </PageContainer>
@@ -44,18 +49,4 @@ const ListContainer = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     padding: 10px;
-`
-const MovieContainer = styled.div`
-    width: 145px;
-    height: 210px;
-    box-shadow: 0px 2px 4px 2px #0000001A;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    img {
-        width: 130px;
-        height: 190px;
-    }
 `
