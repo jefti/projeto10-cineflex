@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function MovieContainer(props){
     const {id, posterURL, title} = props;
     return(
         <MovieBox>
-            <img src={posterURL} alt={title}/>
+            
+            <Link to={`/sessoes/${id}`}>
+                <img src={posterURL} alt={title}/>
+            </Link>
         </MovieBox>  
     );
 };

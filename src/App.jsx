@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import styled from "styled-components"
 import HomePage from "./pages/HomePage/HomePage"
@@ -8,11 +9,20 @@ import SuccessPage from "./pages/SuccessPage/SuccessPage"
 
 export default function App() {
   axios.defaults.headers.common['Authorization'] = 'W89TZQ0D4qdiN0sj82XFVVCP';
+
   return (
         <>
-           <NavContainer>CINEFLEX</NavContainer>
+		<BrowserRouter>
+      <NavContainer>CINEFLEX</NavContainer>
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+        <Route path="/sessoes/:idFilme" element={<SessionsPage />} />
+        <Route path="/assentos/:idSessao" element={<SeatsPage />} />
+			</Routes>
+		</BrowserRouter>
 
-            <HomePage />
+           
+
             {/* <SeatsPage /> */}
             {/* <SessionsPage /> */}
             {/* <SuccessPage /> */}

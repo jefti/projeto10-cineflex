@@ -9,7 +9,7 @@ export default function HomePage() {
         const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies";
         const promise = axios.get(url);
         promise.then((resp) => {
-            console.log(resp.data);
+            //console.log(resp.data);
             setListaFIlmes(resp.data);
         });
         promise.catch( (erro) => console.log(erro));    
@@ -21,14 +21,18 @@ export default function HomePage() {
 
 
     return (
-        <PageContainer>
-            Selecione o filme
+        (listaFilmes.length === 0)
+        ?
+            <Loading>Carregando filmes...</Loading>
+        :
+            <PageContainer>
+                Selecione o filme
 
-            <ListContainer>
-                {Filmes}
-            </ListContainer>
+                <ListContainer>
+                    {Filmes}
+                </ListContainer>
 
-        </PageContainer>
+            </PageContainer>
     )
 }
 
@@ -49,4 +53,11 @@ const ListContainer = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     padding: 10px;
+`
+const Loading = styled.div`
+    margin-top: 80px;
+    color: #AAA;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
 `
