@@ -1,18 +1,40 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
+import Assentos from "../../components/assentos";
+import Footer from "../../components/Footer";
 
 export default function SeatsPage() {
+
+
+    const {idSessao} = useParams();
+    const [listaData, setListaData] = useState({});
+    const [listaFilme, setListaFilme] = useState({});
+    const [listaSeats, setListaSeats] = useState([]);
+    const [hora, setHora] = useState();
+    //console.log(hora);
+
+    useEffect(()=>{
+        const url = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`;
+        const promise = axios.get(url);
+        promise.then(
+            (resp) =>{
+                setListaData(resp.data.day);
+                setListaFilme(resp.data.movie);
+                setListaSeats(resp.data.seats);
+                setHora(resp.data.name);
+            }
+        );
+        promise.catch((erro)=> console.log(erro));
+    },[])
 
     return (
         <PageContainer>
             Selecione o(s) assento(s)
 
-            <SeatsContainer>
-                <SeatItem>01</SeatItem>
-                <SeatItem>02</SeatItem>
-                <SeatItem>03</SeatItem>
-                <SeatItem>04</SeatItem>
-                <SeatItem>05</SeatItem>
-            </SeatsContainer>
+            <Assentos seats={listaSeats}/>
 
             <CaptionContainer>
                 <CaptionItem>
@@ -39,15 +61,7 @@ export default function SeatsPage() {
                 <button>Reservar Assento(s)</button>
             </FormContainer>
 
-            <FooterContainer>
-                <div>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster" />
-                </div>
-                <div>
-                    <p>Tudo em todo lugar ao mesmo tempo</p>
-                    <p>Sexta - 14h00</p>
-                </div>
-            </FooterContainer>
+            <Footer title={listaFilme.title} posterURL= {listaFilme.posterURL} sessao={`${listaData.weekday} - ${hora}`}/>
 
         </PageContainer>
     )
@@ -65,15 +79,7 @@ const PageContainer = styled.div`
     padding-bottom: 120px;
     padding-top: 70px;
 `
-const SeatsContainer = styled.div`
-    width: 330px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-`
+
 const FormContainer = styled.div`
     width: calc(100vw - 40px); 
     display: flex;
@@ -112,19 +118,7 @@ const CaptionItem = styled.div`
     align-items: center;
     font-size: 12px;
 `
-const SeatItem = styled.div`
-    border: 1px solid blue;         // Essa cor deve mudar
-    background-color: lightblue;    // Essa cor deve mudar
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
-    font-family: 'Roboto';
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px 3px;
-`
+
 const FooterContainer = styled.div`
     width: 100%;
     height: 120px;

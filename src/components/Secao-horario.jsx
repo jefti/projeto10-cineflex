@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function SecaoHorario( props){
     const {weekday, date, showtimes} = props.dados;
-    const botoes = showtimes.map( (el,i) => <Link to={`/assentos/${el.id}`} ><button > {el.name} </button></Link>);
+    const botoes = showtimes.map( (el,i) => <Link to={`/assentos/${el.id}`} key={'botao'+el.id}><button > {el.name} </button></Link>);
 
     return (
     <SessionContainer>

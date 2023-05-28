@@ -3,17 +3,28 @@ import styled from "styled-components"
 
 export default function Footer(props){
 
-    const {title,posterURL} = props;
+    const {title,posterURL,sessao} = props;
     return(
-
-    <FooterContainer>
+        title===undefined
+        ? 
+            <FooterContainer>
+                <div>
+                    <img src="https://img.freepik.com/premium-vector/update-concept-application-loading-process-symbol-web-screen-vector-illustration-flat_186332-1253.jpg" alt="Carregando imagem" />
+                </div>
+                <div>
+                    <p>Carregando ...</p>
+                </div>
+            </FooterContainer>
+        :
+        <FooterContainer>
         <div>
             <img src={posterURL} alt={title} />
         </div>
         <div>
             <p>{title}</p>
+            <p>{sessao}</p>
         </div>
-    </FooterContainer>
+        </FooterContainer>
     )
 }
 

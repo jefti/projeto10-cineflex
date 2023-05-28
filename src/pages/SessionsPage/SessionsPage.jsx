@@ -20,7 +20,7 @@ export default function SessionsPage() {
                 //console.log(resp.data.days);
             }
         );
-        promise.catch((erro)=> console.log(erro));
+
     },[])
     
    const sessos = dias.length === 0?
@@ -37,7 +37,7 @@ export default function SessionsPage() {
                 {sessos}
             </div>
 
-                <Footer title={listaDados.title} posterURL= {listaDados.posterURL}/>
+            <Footer title={listaDados.title} posterURL= {listaDados.posterURL}/>
 
 
         </PageContainer>
