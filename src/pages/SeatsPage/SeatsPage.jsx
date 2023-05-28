@@ -8,7 +8,8 @@ import Footer from "../../components/Footer";
 import Caption from "../../components/caption";
 import Formulario from "../../components/formulario";
 
-export default function SeatsPage() {
+export default function SeatsPage(props) {
+    const {setHoraFilme, setData,  setUsuario, setCodigoPessoaFisica, setAssentosComprados} = props;
 
     const navigate = useNavigate();
     const {idSessao} = useParams();
@@ -25,7 +26,11 @@ export default function SeatsPage() {
         const promise = axios.get(url);
         promise.then(
             (resp) =>{
-                //console.log(resp.data.day.date);
+                console.log(resp.data.day.date);
+
+                setHoraFilme(resp.data.name);
+                setData(resp.data.day.date);
+
                 setListaData(resp.data.day);
                 setListaFilme(resp.data.movie);
                 setListaSeats(resp.data.seats);
@@ -44,7 +49,10 @@ export default function SeatsPage() {
             promise.then( resposta => {
                 //console.log(resposta);
                 const texto = listaIds.join();
-                navigate(`/sucesso/${listaFilme.title}/${hora}/${nome}/${cpf}/${listaData.date}/${listaIds}`);
+                setUsuario(nome);
+                setCodigoPessoaFisica(cpf);
+                setAssentosComprados(texto);
+                navigate(`/sucesso`);
             });
             promise.catch( erro => console.log(erro));
 

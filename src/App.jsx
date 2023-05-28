@@ -6,9 +6,16 @@ import HomePage from "./pages/HomePage/HomePage"
 import SeatsPage from "./pages/SeatsPage/SeatsPage"
 import SessionsPage from "./pages/SessionsPage/SessionsPage"
 import SuccessPage from "./pages/SuccessPage/SuccessPage"
+import { useState } from 'react';
 
 export default function App() {
   axios.defaults.headers.common['Authorization'] = 'W89TZQ0D4qdiN0sj82XFVVCP';
+  const [nomeFilme, setNomeFilme] = useState();
+  const [horaFilme, setHoraFilme] = useState();
+  const [Usuario, setUsuario] = useState();
+  const [codigoPessoaFisica, setCodigoPessoaFisica] = useState();
+  const [data, setData] = useState();
+  const [assentosComprados, setAssentosComprados] = useState([]);
 
   return (
         <>
@@ -16,9 +23,9 @@ export default function App() {
       <NavContainer>CINEFLEX</NavContainer>
 			<Routes>
 				<Route path="/" element={<HomePage />} />
-        <Route path="/sessoes/:idFilme" element={<SessionsPage />} />
-        <Route path="/assentos/:idSessao" element={<SeatsPage />} />
-        <Route path="/sucesso/:nome/:hora/:comprador/:cpf/:dia/:mes/:ano/:assentos" element={<SuccessPage />} />
+        <Route path="/sessoes/:idFilme" element={<SessionsPage setNomeFilme={setNomeFilme}/>} />
+        <Route path="/assentos/:idSessao" element={<SeatsPage setHoraFilme={setHoraFilme} setData={setData} setUsuario={setUsuario} setCodigoPessoaFisica={setCodigoPessoaFisica} setAssentosComprados={setAssentosComprados} />} />
+        <Route path="/sucesso" element={<SuccessPage nomeFilme={nomeFilme} horaFilme={horaFilme} Usuario={Usuario} codigoPessoaFisica={codigoPessoaFisica} data={data} assentosComprados={assentosComprados}/>} />
 			</Routes>
 		</BrowserRouter>
 

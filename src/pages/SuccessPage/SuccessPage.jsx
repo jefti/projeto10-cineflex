@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SuccessPage() {
+export default function SuccessPage(props) {
     const nav = useNavigate();
-
-    const {nome, hora, comprador, cpf,dia,mes,ano,assentos} = useParams();
-    const listaAssentos = assentos.split(',');
+    const {nomeFilme, horaFilme, Usuario, codigoPessoaFisica, data,assentosComprados} = props;
+    const listaAssentos = assentosComprados.split(',');
     const AssentosTexto = listaAssentos.map((el, id)=><p key={"elemento" + id}>Assento {el}</p>);
     return (
         <PageContainer>
@@ -13,8 +12,8 @@ export default function SuccessPage() {
 
             <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
-                <p>{nome}</p>
-                <p>{dia}/{mes}/{ano} - {hora}</p>
+                <p>{nomeFilme}</p>
+                <p>{data} - {horaFilme}</p>
             </TextContainer>
 
             <TextContainer data-test="seats-info">
@@ -24,8 +23,8 @@ export default function SuccessPage() {
 
             <TextContainer data-test="client-info">
                 <strong><p>Comprador</p></strong>
-                <p>Nome: {comprador}</p>
-                <p>CPF: {cpf}</p>
+                <p>Nome: {Usuario}</p>
+                <p>CPF: {codigoPessoaFisica}</p>
             </TextContainer>
 
             <button onClick={ ()=> {nav('/')}} data-test="go-home-btn">Voltar para Home</button>

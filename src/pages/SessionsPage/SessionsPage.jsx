@@ -6,7 +6,9 @@ import Footer from "../../components/Footer";
 import SecaoHorario from "../../components/Secao-horario"
 
 
-export default function SessionsPage() {
+export default function SessionsPage(props) {
+    const {setNomeFilme} = props;
+
     const {idFilme} = useParams();
     const [listaDados, setListaDados] = useState({});
     const [dias, setDias] = useState([]);
@@ -18,6 +20,8 @@ export default function SessionsPage() {
             (resp) => {
                 setListaDados(resp.data);
                 setDias(resp.data.days);
+                setNomeFilme(resp.data.title);
+
                 //console.log(resp.data.days);
             }
         );
