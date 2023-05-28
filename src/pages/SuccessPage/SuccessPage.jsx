@@ -1,31 +1,34 @@
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 
 export default function SuccessPage() {
+    const nav = useNavigate();
 
+    const {nome, hora, comprador, cpf,dia,mes,ano,assentos} = useParams();
+    const listaAssentos = assentos.split(',');
+    const AssentosTexto = listaAssentos.map((el, id)=><p key={"elemento" + id}>Assento {el}</p>);
     return (
         <PageContainer>
             <h1>Pedido feito <br /> com sucesso!</h1>
 
             <TextContainer>
                 <strong><p>Filme e sessão</p></strong>
-                <p>Tudo em todo lugar ao mesmo tempo</p>
-                <p>03/03/2023 - 14:00</p>
+                <p>{nome}</p>
+                <p>{dia}/{mes}/{ano} - {hora}</p>
             </TextContainer>
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
-                <p>Assento 01</p>
-                <p>Assento 02</p>
-                <p>Assento 03</p>
+                {AssentosTexto}
             </TextContainer>
 
             <TextContainer>
                 <strong><p>Comprador</p></strong>
-                <p>Nome: Letícia Chijo</p>
-                <p>CPF: 123.456.789-10</p>
+                <p>Nome: {comprador}</p>
+                <p>CPF: {cpf}</p>
             </TextContainer>
 
-            <button>Voltar para Home</button>
+            <button onClick={ ()=> {nav('/')}}>Voltar para Home</button>
         </PageContainer>
     )
 }

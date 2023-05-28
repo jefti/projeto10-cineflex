@@ -5,6 +5,7 @@ import axios from "axios";
 import Footer from "../../components/Footer";
 import SecaoHorario from "../../components/Secao-horario"
 
+
 export default function SessionsPage() {
     const {idFilme} = useParams();
     const [listaDados, setListaDados] = useState({});
@@ -38,7 +39,7 @@ export default function SessionsPage() {
             </div>
 
             <Footer title={listaDados.title} posterURL= {listaDados.posterURL}/>
-
+        
 
         </PageContainer>
     )

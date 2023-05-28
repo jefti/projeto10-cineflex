@@ -2,8 +2,10 @@ import styled from "styled-components"
 import axios from  'axios';
 import { useEffect, useState } from "react";
 import MovieContainer from "../../components/movieContainer";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+
     const [listaFilmes, setListaFIlmes] = useState([]);
     useEffect(()=>{
         const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies";

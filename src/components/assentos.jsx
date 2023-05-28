@@ -2,9 +2,9 @@ import styled from "styled-components"
 import Assento from "./assento";
 
 export default function Assentos(props){
-    const {seats} = props;
-    console.log(seats);
-    const lista = (seats.length=== 0)?<div>Carregando ...</div>:seats.map( (el)=> <Assento key={el.id} name ={el.name} isAvaliable = {el.isAvailable}/>);
+    const {seats, listaSelecionados, setListaSelecionados, listaIds, setListaIds} = props;
+
+    const lista = (seats.length=== 0)?<div>Carregando ...</div>:seats.map( (el)=> <Assento key={el.id} name ={el.name} isAvaliable = {el.isAvailable} id={el.id} listaSelecionados={listaSelecionados} setListaSelecionados={setListaSelecionados} listaIds={listaIds} setListaIds={setListaIds}/>);
     return (
         <SeatsContainer>
             {lista}
