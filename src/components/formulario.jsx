@@ -20,12 +20,12 @@ export default function Formulario(props){
     return(
     <FormContainer onSubmit={Reservar}>
         <label htmlFor="nome">Nome do Comprador:</label>
-        <input name="nome" id="nome" type="text" placeholder="Digite seu nome..." value={nome} onChange={(e)=> setNome(e.target.value)} required/>
+        <input name="nome" id="nome" type="text" placeholder="Digite seu nome..." value={nome} onChange={(e)=> setNome(e.target.value)} required data-test="client-name"/>
 
         <label htmlFor="CPF"> CPF do Comprador:</label>
-        <input name="CPF" id="CPF" type="text" placeholder="Digite seu CPF..." maxLength={11} value={CPF} onChange={(e)=> setCPF(e.target.value)} required />
+        <input name="CPF" id="CPF" type="text" placeholder="Digite seu CPF..." maxLength={11} value={CPF} onChange={(e)=> setCPF(e.target.value)} required data-test="client-cpf"/>
 
-        <button type="submit" >Reservar Assento(s)</button>
+        <button type="submit" data-test="book-seat-btn">Reservar Assento(s)</button>
     </FormContainer>
     )
 }

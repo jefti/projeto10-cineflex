@@ -7,7 +7,7 @@ export default function Footer(props){
     return(
         title===undefined
         ? 
-            <FooterContainer>
+            <FooterContainer data-test="footer">
                 <div>
                     <img src="https://img.freepik.com/premium-vector/update-concept-application-loading-process-symbol-web-screen-vector-illustration-flat_186332-1253.jpg" alt="Carregando imagem" />
                 </div>
@@ -16,7 +16,7 @@ export default function Footer(props){
                 </div>
             </FooterContainer>
         :
-        <FooterContainer>
+        <FooterContainer data-test="footer">
         <div>
             <img src={posterURL} alt={title} />
         </div>

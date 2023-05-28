@@ -34,7 +34,7 @@ export default function Assento(props){
         }
     };
     return(
-        <SeatItem habilitado={isAvaliable} selecionado = {selecionado} onClick={selecionar}>{name}</SeatItem>
+        <SeatItem habilitado={isAvaliable} selecionado = {selecionado} onClick={selecionar} data-test="seat">{name}</SeatItem>
     )
 }
 
